@@ -1,0 +1,7 @@
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\ConsoleApp3.exe
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\ConsoleApp3.pdb
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\Assignment6.csproj.CoreCompileInputs.cache
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\ConsoleApp3.exe
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\Assignment6.csprojResolveAssemblyReference.cache
