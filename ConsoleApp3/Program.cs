@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
@@ -133,7 +134,7 @@ namespace Assignment6
                 Console.WriteLine("Error. Record not deleted.");
             }
         }
-        public static void Average()
+        public static int Average()
         {
             int counter = 0;
             conn = new OleDbConnection();
@@ -147,13 +148,59 @@ namespace Assignment6
             {
                 counter++;
             }
+
             conn.Close();
             Console.WriteLine("====================================");
             Console.WriteLine("Number of Permits issued :" + counter);
             Console.WriteLine("====================================");
+            return counter;
         }
 
+        [TestFixture]
+        public class TestClass
+        {
+            [TestCase]
+            public void AddTest()
+            {
+                int result = Average();
+                Console.Write("Testing: Number of permits issued");
+                Assert.AreEqual(4, result);
+            }
+        }
 
+        public static void Unique()
+        {
+            conn = new OleDbConnection();
+            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\nicol\Documents\Vehicles.accdb";
+            cmd = new OleDbCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SELECT IDNumber, Vehicle_Model, Vehicle_Model2, Vehicle_Model3 FROM Vehicles";
+            conn.Open();
+
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int counter = 0;
+                for (int i = 1; i <= 3; i++)
+                {
+                    if (reader[i] != DBNull.Value)
+                    {
+                        counter++;
+                        if (String.IsNullOrEmpty(Convert.ToString(reader[i])))
+                        {
+                            counter--;
+                        }
+                    }
+                }
+                Console.WriteLine(reader[0] + " has " + counter + " unique vehicles assigned to permit.");
+            }
+            conn.Close();
+        }
+        
+        /*public static void Fees()
+        {
+
+        }*/
 
 
         static void Main(string[] args)
@@ -166,6 +213,7 @@ namespace Assignment6
                 Console.WriteLine("3.Update");
                 Console.WriteLine("4.Delete");
                 Console.WriteLine("5.Average");
+                Console.WriteLine("6.Unique cars");
                 Console.WriteLine("====================================");
                 Console.Write("Select : ");
                 //ask user for selection:
@@ -200,6 +248,12 @@ namespace Assignment6
                 else if (sec == "5")
                 {
                     Average();
+                    Console.WriteLine("====================================");
+                    //GetVehicle();
+                }
+                else if (sec == "6")
+                {
+                    Unique();
                     Console.WriteLine("====================================");
                     //GetVehicle();
                 }
