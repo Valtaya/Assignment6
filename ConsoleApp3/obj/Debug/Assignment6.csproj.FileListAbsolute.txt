@@ -5,3 +5,7 @@ C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\Assignment6.csproj
 C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\ConsoleApp3.exe
 C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
 C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\Assignment6.csprojResolveAssemblyReference.cache
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\nunit.framework.dll
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\nunit.framework.pdb
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\bin\Debug\nunit.framework.xml
+C:\Users\nicol\source\repos\Assignment6\ConsoleApp3\obj\Debug\Assignment6.csproj.CopyComplete

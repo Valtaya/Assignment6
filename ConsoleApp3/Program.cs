@@ -133,6 +133,29 @@ namespace Assignment6
                 Console.WriteLine("Error. Record not deleted.");
             }
         }
+        public static void Average()
+        {
+            int counter = 0;
+            conn = new OleDbConnection();
+            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\nicol\Documents\Vehicles.accdb";
+            cmd = new OleDbCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SELECT * FROM Vehicles";
+            conn.Open();
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                counter++;
+            }
+            conn.Close();
+            Console.WriteLine("====================================");
+            Console.WriteLine("Number of Permits issued :" + counter);
+            Console.WriteLine("====================================");
+        }
+
+
+
+
         static void Main(string[] args)
         {
             while (true)
@@ -142,6 +165,7 @@ namespace Assignment6
                 Console.WriteLine("2.Insert");
                 Console.WriteLine("3.Update");
                 Console.WriteLine("4.Delete");
+                Console.WriteLine("5.Average");
                 Console.WriteLine("====================================");
                 Console.Write("Select : ");
                 //ask user for selection:
@@ -171,7 +195,13 @@ namespace Assignment6
                 {
                     DeleteVehicle();
                     Console.WriteLine("====================================");
-                    GetVehicle();
+                    //GetVehicle();
+                }
+                else if (sec == "5")
+                {
+                    Average();
+                    Console.WriteLine("====================================");
+                    //GetVehicle();
                 }
                 //ask user to press y if they wish to continue, otherwise break;
                 Console.Write("Continue (y/n) : ");
