@@ -54,13 +54,15 @@ namespace Assignment6
             int appnum = Convert.ToInt32(Console.ReadLine());
             Console.Write("ID Number : ");
             int id = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Expiration : (dd/mm/yyyy)");
+            DateTime Expiring = DateTime.Parse(Console.ReadLine());
             //establish connection:
             conn = new OleDbConnection();
             conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\nicol\Documents\Vehicles.accdb";
             cmd = new OleDbCommand();
             cmd.Connection = conn;
             //enter command string to enter data into table:
-            cmd.CommandText = "INSERT INTO Vehicles (Vehicle_Model, Registration, Owner, Apartment, IDNumber) VALUES ('" + model + "','" + reg + "','" + name + "','" + appnum + "','" + id + "')";
+            cmd.CommandText = "INSERT INTO Vehicles (Vehicle_Model, Registration, Owner, Apartment, IDNumber, Expiring) VALUES ('" + model + "','" + reg + "','" + name + "','" + appnum + "','" + id + "','" + Expiring + "')";
             conn.Open();
             int x = cmd.ExecuteNonQuery();
             conn.Close();
@@ -196,11 +198,41 @@ namespace Assignment6
             }
             conn.Close();
         }
-        
+
         /*public static void Fees()
         {
 
         }*/
+        public static int FeesCalc()
+        {
+
+            conn = new OleDbConnection();
+            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\nicol\Documents\Vehicles.accdb";
+            cmd = new OleDbCommand();
+            cmd.Connection = conn;
+            int fees = 80;
+            int feesTotal = 0;
+            cmd.CommandText = "SELECT * FROM Vehicles";
+            conn.Open();  
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //store expiration date 
+                DateTime expire = Convert.ToDateTime(reader["Expiring"]);
+                int due = 0;    //fees due on current permit
+                if (expire < DateTime.Now)  //if current date later than expiry 
+                {
+                    feesTotal = feesTotal + fees;   //add to total fees
+                    due += fees;                    //add to current permit fees 
+                }
+                Console.WriteLine(due + " euro on permit: " + reader[0]);
+            }
+            Console.WriteLine("Total fees due: " + feesTotal);
+            //close the reader when no longer needed
+            reader.Close();
+            return feesTotal;
+        }
+
 
 
         static void Main(string[] args)
@@ -214,6 +246,7 @@ namespace Assignment6
                 Console.WriteLine("4.Delete");
                 Console.WriteLine("5.Average");
                 Console.WriteLine("6.Unique cars");
+                Console.WriteLine("7.Fees due");
                 Console.WriteLine("====================================");
                 Console.Write("Select : ");
                 //ask user for selection:
@@ -254,6 +287,12 @@ namespace Assignment6
                 else if (sec == "6")
                 {
                     Unique();
+                    Console.WriteLine("====================================");
+                    //GetVehicle();
+                }
+                else if (sec == "7")
+                {
+                    FeesCalc();
                     Console.WriteLine("====================================");
                     //GetVehicle();
                 }
