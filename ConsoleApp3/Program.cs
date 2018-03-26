@@ -162,15 +162,17 @@ namespace Assignment6
             Console.WriteLine("====================================");
             return counter;
         }
-
+        //attempted unit test:
         [TestFixture]
         public class TestClass
         {
             [TestCase]
             public void AddTest()
             {
+                //return from Average():
                 int result = Average();
                 Console.Write("Testing: Number of permits issued");
+                //answer should be 4:
                 Assert.AreEqual(4, result);
             }
         }
